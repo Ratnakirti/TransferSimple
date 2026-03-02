@@ -102,7 +102,7 @@ The graph is defined in `backend/app/agents/graph.py` using `StateGraph(GraphSta
 | `fastapi` | REST API framework |
 | `uvicorn` | ASGI server |
 | `langgraph` | AI pipeline orchestration (state machine + checkpointing) |
-| `langchain-openai` | OpenAI-compatible LLM client (used for both Fuelix and Google AI Studio) |
+| `langchain-openai` | OpenAI-compatible LLM client (used Google AI Studio) |
 | `httpx` | Async HTTP client — used to explicitly route LLM calls through/around corporate proxy |
 | `pydantic` | Request/response schema validation |
 | `supabase` | Python client for Supabase database + storage |
@@ -273,10 +273,6 @@ When a transfer has **multiple rejection codes**, the aggregate confidence is th
 
 The app supports two interchangeable LLM providers via an `LLM_PROVIDER` environment variable. Both are accessed through the OpenAI-compatible chat completions API using `langchain-openai`'s `ChatOpenAI`.
 
-### Fuelix (`LLM_PROVIDER=fuelix`)
-
-Fuelix is an internal AI gateway at Telus that proxies access to models such as `claude-sonnet-4-6` and `gemini-2.5-flash`. All traffic routes through the corporate proxy.
-
 ### Google AI Studio (`LLM_PROVIDER=google`)
 
 Direct access to Gemini models via the `generativelanguage.googleapis.com/v1beta/openai/` endpoint. Also routed through the corporate proxy.
@@ -403,14 +399,6 @@ Create `backend/.env` with the following:
 SUPABASE_URL=https://<project>.supabase.co
 SUPABASE_KEY=<publishable anon key>
 BUCKET_NAME=clearinghouse-resources
-
-# ── LLM provider switch: "fuelix" | "google" ─────────────────────────
-LLM_PROVIDER=fuelix
-
-# ── Fuelix (internal Telus AI gateway) ───────────────────────────────
-FUELIX_API_KEY=<key>
-BASE_URL=https://api-beta.fuelix.ai/v1
-MODEL_NAME=gemini-2.5-flash
 
 # ── Google AI Studio (OpenAI-compatible) ─────────────────────────────
 GOOGLE_API_KEY=<key>
