@@ -103,7 +103,6 @@ The graph is defined in `backend/app/agents/graph.py` using `StateGraph(GraphSta
 | `uvicorn` | ASGI server |
 | `langgraph` | AI pipeline orchestration (state machine + checkpointing) |
 | `langchain-openai` | OpenAI-compatible LLM client (used Google AI Studio) |
-| `httpx` | Async HTTP client — used to explicitly route LLM calls through/around corporate proxy |
 | `pydantic` | Request/response schema validation |
 | `supabase` | Python client for Supabase database + storage |
 | `pdfplumber` | PDF text extraction |
@@ -275,13 +274,9 @@ The app supports two interchangeable LLM providers via an `LLM_PROVIDER` environ
 
 ### Google AI Studio (`LLM_PROVIDER=google`)
 
-Direct access to Gemini models via the `generativelanguage.googleapis.com/v1beta/openai/` endpoint. Also routed through the corporate proxy.
+Direct access to Gemini models via the `generativelanguage.googleapis.com/v1beta/openai/` endpoint.
 
 > **Thinking models:** Both `gemini-2.5-flash` and `gemini-3-flash-preview` are thinking models that emit `<think>...</think>` reasoning tokens before the JSON output. `_clean_llm_json()` strips these before parsing, and `max_tokens` is set to 16384 to accommodate the thinking budget.
-
-### Corporate Proxy Handling
-
-`config.py` sets all four proxy environment variables (`HTTP_PROXY`, `HTTPS_PROXY`, etc.) at startup. However, `httpx` (used internally by the OpenAI SDK) ignores environment proxy vars when an explicit `http_async_client` is provided. Both LLM providers pass an explicit `httpx.AsyncClient(proxy=PROXY, trust_env=False)` to ensure the proxy is always used and environment vars don't conflict.
 
 ---
 
@@ -415,7 +410,6 @@ GOOGLE_MODEL_NAME=gemini-2.5-flash
 - Python 3.11+
 - Node.js 18+
 - [Tesseract-OCR](https://github.com/UB-Mannheim/tesseract/wiki) installed at a standard Windows path (required for FAX sim)
-- Access to the corporate proxy (Telus network or VPN)
 
 ### Backend
 
