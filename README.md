@@ -51,8 +51,7 @@ TransferSimple is an internal operations tool that automates the resolution of r
            │
 ┌──────────▼────────────┐
 │   LLM (OpenAI-compat) │
-│   Fuelix or Google    │
-│   AI Studio           │
+│   Google AI Studio    │
 └───────────────────────┘
 ```
 
