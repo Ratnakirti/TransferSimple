@@ -1,4 +1,4 @@
-# TransferSimple — AI-Powered ATON Transfer Resolution Platform
+# TransferSimple — ATON Transfer Resolution Platform
 
 TransferSimple is an internal operations tool that automates the resolution of rejected ATON (Account Transfer Online Notification) transfers at Wealthsimple. When a transfer is rejected by the clearinghouse, an ops specialist uploads or triggers a simulation of the source document (email, FAX, or PDF). The AI pipeline parses the rejection, drafts both an institutional response and a plain-language client email, and presents them in a Kanban-style review board. The specialist reviews, edits if needed, and approves — at which point the drafts are logged to audit.
 
