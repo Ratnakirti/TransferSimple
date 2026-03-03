@@ -33,12 +33,12 @@ TransferSimple is an internal operations tool that automates the resolution of r
 └──────────────────────────┬──────────────────────────────────────────┘
                            │ REST + WebSocket
 ┌──────────────────────────▼──────────────────────────────────────────┐
-│                      FastAPI (port 8000)                             │
+│                      FastAPI (port 8000)                            │
 │   /api/sim/{id}  →  background task  →  LangGraph pipeline          │
 │   /api/transfer/{card_id}/move-to-review                            │
-│   /api/transfer/{card_id}/approve                                    │
-│   /api/transfer/{card_id}/send-aton                                  │
-│   /api/transfer/{card_id}/send-customer                              │
+│   /api/transfer/{card_id}/approve                                   │
+│   /api/transfer/{card_id}/send-aton                                 │
+│   /api/transfer/{card_id}/send-customer                             │
 └──────────┬───────────────────────────────────────────┬──────────────┘
            │                                           │
 ┌──────────▼────────────┐                  ┌──────────▼───────────────┐
